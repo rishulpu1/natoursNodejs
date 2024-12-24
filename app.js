@@ -8,7 +8,10 @@ const userRouter = require('./routes/userRoutes');
 
 // middlewares
 app.use(express.json());
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 //router
 app.use('/api/v1/tours', tourRouter);
