@@ -13,10 +13,12 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true,
   })
   .then(() => {
     console.log('DB connection successful');
+  })
+  .catch((err) => {
+    console.log('Error aagya:', err);
   });
 const tourSchema = new mongoose.Schema({
   name: {
@@ -37,7 +39,7 @@ const Tour = mongoose.model('Tour', tourSchema);
 const testTour = new Tour({
   name: 'Tour to Mcleod',
   rating: 4.8,
-  price: 100,
+  price: 120,
 });
 testTour
   .save()
