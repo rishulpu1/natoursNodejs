@@ -48,6 +48,10 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Tour cover image must be given'],
     },
+    secretTour: {
+      type: Boolean,
+      default: false,
+    },
     images: [String],
     createdAt: { type: Date, default: Date.now(), select: false },
     startDates: [Date],
@@ -66,6 +70,13 @@ tourSchema.virtual('durationWeeks').get(function () {
 
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+//Query Middleware: runs before .find() and .findOne()
+
+tourSchema.pre(/^find/, function (next) {
+  this.find({ secretTour: { $ne: true } });
   next();
 });
 
