@@ -16,7 +16,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('DB connection successful');
+    console.log('DB connection successful!');
   })
   .catch((err) => {
     console.log('Error aagya:', err);
